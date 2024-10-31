@@ -13,7 +13,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
+  final TextEditingController ConfirmPasswordController =
       TextEditingController();
 
   @override
@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               //confirm password textfield
               MyTextField(
-                  controller: confirmPasswordController,
+                  controller: ConfirmPasswordController,
                   hintText: "Confirm password",
                   obsureText: true),
 
