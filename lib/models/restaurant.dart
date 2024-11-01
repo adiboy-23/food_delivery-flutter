@@ -36,7 +36,7 @@ class Restaurant extends ChangeNotifier {
       name: "Indian Burger",
       description:
           "A juicy veg patty with tangy sauce and spicy green chutney.",
-      imagePath: "lib/images/burgers/indain_burger.jpeg",
+      imagePath: "lib/images/burgers/indian_burger.jpeg",
       price: 199,
       category: FoodCategory.burgers,
       availableAddons: [
@@ -262,7 +262,7 @@ class Restaurant extends ChangeNotifier {
       name: "Lava Cake",
       description:
           "Decadent molten lava cake with a gooey chocolate center, served warm with ice cream.",
-      imagePath: "lib/images/desserts/lava_cale.jpeg",
+      imagePath: "lib/images/desserts/lava_cake.jpeg",
       price: 199,
       category: FoodCategory.desserts,
       availableAddons: [
