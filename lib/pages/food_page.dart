@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:food_del/components/my_button.dart';
+import 'package:food_del/models/cart_items.dart';
 import 'package:food_del/models/food.dart';
 import 'package:food_del/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +14,7 @@ class FoodPage extends StatefulWidget {
     super.key,
     required this.food,
   }) {
-    //init selected addons tobe false
+    // Initialize selected addons to be false
     for (Addon addon in food.availableAddons) {
       selectedAddons[addon] = false;
     }
@@ -23,33 +25,29 @@ class FoodPage extends StatefulWidget {
 }
 
 class _FoodPageState extends State<FoodPage> {
-  //method to add to cart
-  void addToCart(Food food, Map<Addon, bool> selectedAddons) {
-    //close the current food page to go back to menu
-    Navigator.pop(context);
+  // Method to add to cart
+  void addToCart(Food food) {
+    // Get selected add-ons
+    List<Addon> selectedAddons = widget.selectedAddons.entries
+        .where((entry) => entry.value)
+        .map((entry) => entry.key)
+        .toList();
 
-    //format the selected addons
-    List<Addon> currentlySelectedAddons = [];
-    for (Addon addon in widget.food.availableAddons) {
-      if (widget.selectedAddons[addon] == true) {
-        currentlySelectedAddons.add(addon);
-      }
-    }
-
-    //add to cart
-    context.read()<Restaurant>().addToCart(food, currentlySelectedAddons);
+    // Call the addToCart method from the Restaurant model
+    Provider.of<Restaurant>(context, listen: false)
+        .addToCart(food, selectedAddons);
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        //scaffold UI
+        // Scaffold UI
         Scaffold(
           body: SingleChildScrollView(
             child: Column(
               children: [
-                //food image
+                // Food image
                 Image.asset(widget.food.imagePath),
 
                 Padding(
@@ -57,7 +55,7 @@ class _FoodPageState extends State<FoodPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //food name
+                      // Food name
                       Text(
                         widget.food.name,
                         style: const TextStyle(
@@ -68,7 +66,7 @@ class _FoodPageState extends State<FoodPage> {
 
                       const SizedBox(height: 8),
 
-                      //food price
+                      // Food price
                       Text(
                         "₹${widget.food.price}",
                         style: TextStyle(
@@ -80,7 +78,7 @@ class _FoodPageState extends State<FoodPage> {
 
                       const SizedBox(height: 10),
 
-                      //food description
+                      // Food description
                       Text(
                         widget.food.description,
                       ),
@@ -91,7 +89,7 @@ class _FoodPageState extends State<FoodPage> {
 
                       const SizedBox(height: 10),
 
-                      //addons
+                      // Add-ons
                       Text(
                         "Add-ons",
                         style: TextStyle(
@@ -116,10 +114,10 @@ class _FoodPageState extends State<FoodPage> {
                           padding: EdgeInsets.zero,
                           itemCount: widget.food.availableAddons.length,
                           itemBuilder: (context, index) {
-                            //get individual addon
+                            // Get individual addon
                             Addon addon = widget.food.availableAddons[index];
 
-                            //return check box UI
+                            // Return check box UI
                             return CheckboxListTile(
                               title: Text(addon.name),
                               subtitle: Text(
@@ -142,10 +140,10 @@ class _FoodPageState extends State<FoodPage> {
                   ),
                 ),
 
-                //button to add to cart
+                // Button to add to cart
                 MyButton(
                   text: "Add to Cart",
-                  onTap: () => addToCart(widget.food, widget.selectedAddons),
+                  onTap: () => addToCart(widget.food),
                 ),
 
                 const SizedBox(height: 25),
@@ -154,7 +152,7 @@ class _FoodPageState extends State<FoodPage> {
           ),
         ),
 
-        //back button
+        // Back button
         SafeArea(
           child: Opacity(
             opacity: 0.6,
