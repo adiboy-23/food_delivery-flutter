@@ -343,12 +343,15 @@ class Restaurant extends ChangeNotifier {
     ),
   ];
 
+  //delivery address
+  String _deliveryAddres = 'Pes Boys Hostel';
   /*  
   GETTERS 
   */
 
   List<Food> get menu => _menu;
   List<CartItem> get cart => _cart;
+  String get deliveryAddress => _deliveryAddres;
 
   /* 
    OPERATIONS 
@@ -433,6 +436,11 @@ class Restaurant extends ChangeNotifier {
     notifyListeners();
   }
 
+  //update delivery address
+  void updateDeliveryAddress(String newAddress) {
+    _deliveryAddres = newAddress;
+    notifyListeners();
+  }
   /*  
   HELPERS 
   */
@@ -464,6 +472,8 @@ class Restaurant extends ChangeNotifier {
     receipt.writeln();
     receipt.writeln("Total Items: ${getTotalItemCount()}");
     receipt.writeln("Total Price: ${_formatPrice(getTotalPrice())}");
+    receipt.writeln();
+    receipt.writeln("Delivering to : $deliveryAddress");
 
     return receipt.toString();
   }

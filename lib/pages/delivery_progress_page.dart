@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:food_del/components/my_receipt.dart';
+import 'package:food_del/models/restaurant.dart';
+import 'package:food_del/services/database/firestore.dart';
+import 'package:provider/provider.dart';
 
-class DeliveryProgressPage extends StatelessWidget {
+class DeliveryProgressPage extends StatefulWidget {
   const DeliveryProgressPage({super.key});
+
+  @override
+  State<DeliveryProgressPage> createState() => _DeliveryProgressPageState();
+}
+
+class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
+  //get access to db
+  FireStoreService db = FireStoreService();
+
+  @override
+  void initState() {
+    super.initState();
+    //if we get to this page, submit order to firebase db
+    String receipt = context.read<Restaurant>().diplayCartReceipt();
+    db.saveOrderToDatbase(receipt);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Delivery in progress..."),
         backgroundColor: Colors.transparent,
       ),
       bottomNavigationBar: _buildBottomNavBar(context),
