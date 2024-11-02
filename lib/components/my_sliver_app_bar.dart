@@ -35,7 +35,22 @@ class MySliverAppBar extends StatelessWidget {
       ],
       backgroundColor: Theme.of(context).colorScheme.surface,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: const Text("Sunset Diner"),
+      title: Text(
+        "Anand Appétit",
+        style: TextStyle(
+          fontSize: 28, // Adjust the size for a larger appearance
+          fontWeight: FontWeight.w900, // Extra bold for thickness
+          color: Colors.black, // Rich black color
+          letterSpacing: 1.5, // Slight spacing for emphasis
+          shadows: [
+            Shadow(
+              offset: const Offset(2.0, 2.0), // Soft shadow for depth
+              blurRadius: 4.0,
+              color: Colors.grey.withOpacity(0.5),
+            ),
+          ],
+        ),
+      ),
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.only(bottom: 50.0),

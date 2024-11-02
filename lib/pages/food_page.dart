@@ -1,7 +1,5 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:food_del/components/my_button.dart';
-import 'package:food_del/models/cart_items.dart';
 import 'package:food_del/models/food.dart';
 import 'package:food_del/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +34,9 @@ class _FoodPageState extends State<FoodPage> {
     // Call the addToCart method from the Restaurant model
     Provider.of<Restaurant>(context, listen: false)
         .addToCart(food, selectedAddons);
+
+    // Navigate back to the HomePage
+    Navigator.pop(context);
   }
 
   @override
