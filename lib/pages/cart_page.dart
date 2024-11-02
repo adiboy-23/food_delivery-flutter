@@ -82,12 +82,25 @@ class CartPage extends StatelessWidget {
               //pay button
               MyButton(
                 text: "Proceed to Payment",
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PaymentPage(),
-                  ),
-                ),
+                onTap: () {
+                  if (userCart.isEmpty) {
+                    // Show a message if the cart is empty
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                            "Your cart is empty! Please add items to proceed."),
+                      ),
+                    );
+                  } else {
+                    // Navigate to the payment page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PaymentPage(),
+                      ),
+                    );
+                  }
+                },
               ),
 
               const SizedBox(height: 25),
