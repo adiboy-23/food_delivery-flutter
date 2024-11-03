@@ -3,6 +3,7 @@ import 'package:food_del/components/my_receipt.dart';
 import 'package:food_del/models/restaurant.dart';
 import 'package:food_del/services/database/firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DeliveryProgressPage extends StatefulWidget {
   const DeliveryProgressPage({super.key});
@@ -12,15 +13,34 @@ class DeliveryProgressPage extends StatefulWidget {
 }
 
 class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
-  //get access to db
+  // Get access to db
   FireStoreService db = FireStoreService();
+  final String phoneNumber = "+91 7988298960"; // Delivery driver's phone number
 
   @override
   void initState() {
     super.initState();
-    //if we get to this page, submit order to firebase db
+    // If we get to this page, submit order to Firebase DB
     String receipt = context.read<Restaurant>().diplayCartReceipt();
     db.saveOrderToDatbase(receipt);
+  }
+
+  // Method to launch a phone call
+  void _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  // Method to send a message
+  void _sendMessage() async {
+    final Uri launchUri = Uri(
+      scheme: 'sms',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 
   @override
@@ -38,7 +58,7 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
     );
   }
 
-  //Custom Bottom NavBar - Message / Call delivery deriver
+  // Custom Bottom NavBar - Message / Call delivery driver
   Widget _buildBottomNavBar(BuildContext context) {
     return Container(
       height: 100,
@@ -52,7 +72,7 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
       padding: const EdgeInsets.all(25),
       child: Row(
         children: [
-          //profile pic of driver
+          // Profile pic of driver
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
@@ -66,7 +86,7 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
 
           const SizedBox(width: 10),
 
-          //driver details
+          // Driver details
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -91,14 +111,14 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
 
           Row(
             children: [
-              //message driver
+              // Message driver
               Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: _sendMessage, // Call the send message method
                   icon: const Icon(Icons.message),
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -106,14 +126,14 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
 
               const SizedBox(width: 10),
 
-              //call button
+              // Call button
               Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: _makePhoneCall, // Call the make phone call method
                   icon: const Icon(Icons.call),
                   color: Colors.green,
                 ),
