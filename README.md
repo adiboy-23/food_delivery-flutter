@@ -1,6 +1,14 @@
-# food_del
+## FOOD DILEVERY APP IN FLUTTER
 
-A new Flutter project.
+- To run this project
+    - clone the repo
+    - run    ``` flutter run```
+
+
+-Demo
+
+![food-dilevry-app](https://github.com/user-attachments/assets/942ba4a7-b032-406d-a7e1-8d96ca6766b2)
+
 
 ## Getting Started
 
@@ -14,4 +22,4 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-# food_delivery-flutter
+
