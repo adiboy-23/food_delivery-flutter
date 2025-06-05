@@ -17,7 +17,9 @@ Simple food delivery app made using flutter and firebase for backend.
 
 -Demo
 
-![food-dilevry-app](https://github.com/user-attachments/assets/942ba4a7-b032-406d-a7e1-8d96ca6766b2)
+
+![WhatsApp Video Nov 2 2024 GIF](https://github.com/user-attachments/assets/741e61f5-10fd-4088-8586-db4b0328d524)
+
 
 
 - Firebase ->
